@@ -65,9 +65,10 @@ DebianInstall()
     apt update && apt upgrade
     echo "Install curl, wget, getting omz"
     sleep 1
-    apt install curl wget zsh
+    apt install curl wget zsh sudo
+    sed 
     sleep 1
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" $USER
     cp ../shared/.vimrc /home/$USER/.vimrc
     cp ../macos/.zshrc /home/$USER/.zshrc
     
