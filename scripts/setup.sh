@@ -69,9 +69,10 @@ DebianInstall()
     sed 
     sleep 1
     echo "sh -c 'curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh'" > /home/$USER/installomz.sh
+    chmod u+x /home/$USER/installomz.sh
     cp ../shared/.vimrc /home/$USER/.vimrc
     cp ../macos/.zshrc /home/$USER/.zshrc
-    
+    su $USER; echo "Run ./installom.sh"
 }
 
 while getopts ":hivz:" option; do
