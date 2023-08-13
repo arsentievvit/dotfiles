@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/bin/bash -i
 
 # dotfiles-setup
 # by arsentievvit
-# for me only 
+# for me only
 # ver 0.1
 
 set -e
@@ -58,22 +58,29 @@ Installsoftware()
 }
 
 DebianInstall()
-{   
-    USER=`cat /etc/passwd | tail -n1 | cut -d":" -f1`
+{
+    USERNAME=`cat /etc/passwd | tail -n1 | cut -d":" -f1`
     echo "Updating repository and upgrading system"
     sleep 1
     apt update && apt upgrade
-    echo "Install curl, wget, getting omz"
+    echo "Install curl, wget, zsh sudo vim"
     sleep 1
-    apt install curl wget zsh sudo
-    sed 
+    apt install curl wget zsh sudo vim python3-pip bat -y
+    pip install thefuck
     sleep 1
-    echo "sh -c 'curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh'" > /home/$USER/installomz.sh
-    chmod u+x /home/$USER/installomz.sh
-    cp ../shared/.vimrc /home/$USER/.vimrc
-    cp ../macos/.zshrc /home/$USER/.zshrc
-    su $USER; echo "Run ./installomz.sh"
-    ./installomz.sh
+    curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh  > /home/$USERNAME/installomz.sh
+    # Found /home/admini/.zshrc. Backing up to /home/admini/.zshrc.pre-oh-my-zsh
+    echo "&& mv /home/'$USERNAME'/.zshrc.pre-oh-my-zsh /home/'$USERNAME'/.zshrc" >> /home/$USERNAME/installomz.sh
+    chmod u+x /home/$USERNAME/installomz.sh
+    cp ../shared/.vimrc /home/$USERNAME/.vimrc
+    cp ../macos/.zshrc /home/$USERNAME/.zshrc
+    usermod -aG sudo $USERNAME
+    echo "Added '$USERNAME' to sudo group"
+    usermod -s /usr/bin/zsh $USERNAME
+    echo "Set zsh as default for '$USERNAME'"
+    echo ""
+    echo "Setup is almost complete!"
+    echo "Log in to default non-priviled user and run ./installomz.sh"
 }
 
 while getopts ":hivz:" option; do
