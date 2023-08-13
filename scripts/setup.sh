@@ -59,7 +59,7 @@ Installsoftware()
 
 DebianInstall()
 {   
-    USER='cat /etc/passwd | tail -n1 | cut -d":" -f1'
+    USER=`cat /etc/passwd | tail -n1 | cut -d":" -f1`
     echo "Updating repository and upgrading system"
     sleep 1
     apt update && apt upgrade
