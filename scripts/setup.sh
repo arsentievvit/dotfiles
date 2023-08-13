@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # dotfiles-setup
 # by arsentievvit
@@ -32,6 +32,7 @@ Installsoftware()
     PS3="Select your distribution: "
     echo $PS3
     select distrib in Debian-based RHEL-based MacOS Exit
+
     do
         case $distrib in
             "Debian-based")
@@ -63,7 +64,7 @@ DebianInstall()
     sudo apt update && sudo apt upgrade
     echo "Install curl, wget, getting omz"
     sleep 1
-    sudo apt install curl wget zsh git
+    sudo apt install curl wget zsh
     sleep 1
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     cp ../shared/.vimrc ~/.vimrc
