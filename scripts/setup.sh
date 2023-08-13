@@ -72,7 +72,8 @@ DebianInstall()
     chmod u+x /home/$USER/installomz.sh
     cp ../shared/.vimrc /home/$USER/.vimrc
     cp ../macos/.zshrc /home/$USER/.zshrc
-    su $USER; echo "Run ./installom.sh"
+    su $USER; echo "Run ./installomz.sh"
+    ./installomz.sh
 }
 
 while getopts ":hivz:" option; do
