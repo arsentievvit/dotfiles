@@ -58,17 +58,18 @@ Installsoftware()
 }
 
 DebianInstall()
-{
+{   
+    user=${cat /etc/passwd | tail -n1 | cut -d":" -f1}
     echo "Updating repository and upgrading system"
     sleep 1
-    sudo apt update && sudo apt upgrade
+    apt update && apt upgrade
     echo "Install curl, wget, getting omz"
     sleep 1
     sudo apt install curl wget zsh
     sleep 1
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    cp ../shared/.vimrc ~/.vimrc
-    cp ../macos/.zshrc ~/.zshrc
+    cp ../shared/.vimrc /home/$user/.vimrc
+    cp ../macos/.zshrc /home/$user/.zshrc
     
 }
 
